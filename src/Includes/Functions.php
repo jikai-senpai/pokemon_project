@@ -25,10 +25,12 @@ try {
         echo "Id: " . $result['ID'] . "<br>";
         echo "Name: " . $result['NAME'] . "<br>";
         echo "Type: " . $result['TYPE'] . "<br>";
-        echo "Status: " . ($result['STATUS'] ? 'Activo' : 'Inactivo') . "<br>";
+        echo "Status: " . ($result['STATUS'] ? 'Vivo' : 'Muerto') . "<br>";
     } else {
         echo "No se encontró el registro.";
     }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
+
+
