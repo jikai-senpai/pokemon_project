@@ -18,7 +18,6 @@ $options = [
 try {
     // Crear instancia de PDO
     $pdo = new PDO($dsn, $user, $pass, $options);
-    echo "Conexión exitosa a la base de datos";
 } catch (PDOException $e) {
     // Manejar errores de conexión
     echo "Error de conexión: " . $e->getMessage();
