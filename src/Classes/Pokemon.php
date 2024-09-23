@@ -1,7 +1,5 @@
 <?php
 
-namespace Pokemon;
-
 class Pokemon {
     private $id;
     private $name;

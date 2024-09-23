@@ -1,7 +1,5 @@
 <?php
 
-namespace Sicario;
-
 class Sicario {
     private $id;
     private $name;
