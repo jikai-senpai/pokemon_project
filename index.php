@@ -1,3 +1,3 @@
 <?php
-echo "Hello World!";
+require_once 'src/Config/db.php';
 ?>
