@@ -10,7 +10,7 @@ class Pokemon {
         $this->id = $id;
         $this->name = $name;
         $this->type = $type;
-        $this->status = true;
+        $this->status = $status;
     }
 
     public function getId() {
@@ -25,11 +25,7 @@ class Pokemon {
         return $this->type;
     }
 
-    public function estaMuerto() {
-        return $this->status === false;
-    }
-
     public function getStatus() {
-        $this->status = $status;
+        return $this->status;
     }
 }
