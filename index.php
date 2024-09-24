@@ -1,5 +1,7 @@
 <?php
 require_once 'src/Includes/Functions.php';
+
+$pokemonNames = getAllPokemonNames($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +18,11 @@ require_once 'src/Includes/Functions.php';
     <h1>Seleccionar objetivo</h1>
     <label for="id">Nombre del objetivo:</label>
     <select>
-
+        <?php foreach ($pokemonNames as $pokemon): ?>
+            <option value="<?php echo htmlspecialchars($pokemon['name']); ?>">
+                <?php echo htmlspecialchars($pokemon['name']); ?>
+            </option>
+        <?php endforeach; ?>
     </select>
     <br>
     <br>
