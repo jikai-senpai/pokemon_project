@@ -30,12 +30,12 @@ function getPokemonIdByName($pdo, $name) {
     }
 }
 
-function createContrato($pdo, $nameSicario, $idPokemon) {
+function createContrato($pdo, $sicarioName, $pokemonId) {
     try{
-        $sql = "INSERT INTO contrato (name_sicario, id_pokemon) VALUES (:name_sicario, :id_pokemon)";
+        $sql = "INSERT INTO contrato (sicario_name, id_pokemon) VALUES (:sicario_name, :id_pokemon)";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':name_sicario', $nameSicario);
-        $stmt->bindParam(':id_pokemon', $idPokemon);
+        $stmt->bindParam(':sicario_name', $sicarioName);
+        $stmt->bindParam(':id_pokemon', $pokemonId);
         $stmt->execute();
     }
     catch(PDOException $e){
