@@ -8,6 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $pokemonName = isset($_POST['pokemon_name']) ? $_POST['pokemon_name'] : '';
     $pokemonId = getPokemonIdByName($pdo, $pokemonName);
+
+    if ($sicarioName && $pokemonId) {
+        createContrato($pdo, $sicarioName, $pokemonId);
+        echo 'Contrato creado exitosamente';
+    } else {
+        echo 'Error al crear el contrato';
+    }
 }
 ?>
 

@@ -42,5 +42,3 @@ function createContrato($pdo, $sicarioName, $pokemonId) {
         echo "Error: " . $e->getMessage();
     }
 }
-
-
