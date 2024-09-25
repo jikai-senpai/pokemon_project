@@ -5,9 +5,8 @@ $pokemonNames = getAllPokemonNames($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sicarioName = isset($_POST['sicario_name']) ? $_POST['sicario_name'] : '';
-    $sicario = getSicarioByName($pdo, $sicarioName);
 
-   $pokemonName = isset($_POST['pokemon_name']) ? $_POST['pokemon_name'] : '';
+    $pokemonName = isset($_POST['pokemon_name']) ? $_POST['pokemon_name'] : '';
 }
 ?>
 

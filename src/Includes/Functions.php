@@ -1,6 +1,6 @@
 <?php
 require_once 'src/Config/db.php';
-require_once 'src/Classes/Sicario.php';
+require_once 'src/Classes/Contrato.php';
 require_once 'src/Classes/Pokemon.php';
 
 function getAllPokemonNames($pdo) {
@@ -16,17 +16,6 @@ function getAllPokemonNames($pdo) {
     }
 }
 
-function getSicarioByName($pdo, $name) {
-    try{
-        $sql = "SELECT * FROM sicarios WHERE name = :name";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute(['name' => $name]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-    catch(PDOException $e){
-        echo "Error: " . $e->getMessage();
-        return null;
-    }
-}
+
 
 
