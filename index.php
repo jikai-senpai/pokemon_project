@@ -15,13 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Acción: Matar</title>
+    <title>Sicarios para pokemones</title>
 </head>
 <body>
     <form method="post">
         <h1>Contratar sicario</h1>
         <label for="id">Nombre del sicario:</label>
-        <input type="text" id="sicario_name" name="sicario_name">
+        <input type="text" name="sicario_name">
         <br>
         <h1>Seleccionar objetivo</h1>
         <label for="id">Nombre del objetivo:</label>
@@ -37,13 +37,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
         <button type="submit">Contratar</button>
     </form>
-    <?php if (isset($sicario) && $sicario): ?>
-        <h1>Información del sicario</h1>
-        <p>Id: <?php echo htmlspecialchars($sicario['ID']); ?></p>
-        <p>Nombre: <?php echo htmlspecialchars($sicario['NAME']); ?></p>
-        <p>Status: <?php echo htmlspecialchars($sicario['WORKING']); ?></p>
-    <?php else: ?>
-        <p>No se encontró información del sicario.</p>
-    <?php endif; ?>
 </body>
 </html>
