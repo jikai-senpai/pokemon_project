@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sicarioName = isset($_POST['sicario_name']) ? $_POST['sicario_name'] : '';
 
     $pokemonName = isset($_POST['pokemon_name']) ? $_POST['pokemon_name'] : '';
+    $pokemonId = getPokemonIdByName($pdo, $pokemonName);
 }
 ?>
 
