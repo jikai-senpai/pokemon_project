@@ -16,4 +16,17 @@ function getAllPokemonNames($pdo) {
     }
 }
 
+function getSicarioByName($pdo, $name) {
+    try{
+        $sql = "SELECT * FROM sicarios WHERE name = :name";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['name' => $name]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+        return null;
+    }
+}
+
 
