@@ -17,6 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $idPokemonContartos = getIdPokemonContratos($pdo);
+$pokemonNamesFromContratos = [];
+
+foreach ($idPokemonContartos as $idPokemon) {
+    $pokemonNameByContrato = getPokemonNameById($pdo, $idPokemon['id_pokemon']);
+    if ($pokemonNameByContrato) {
+        $pokemonNamesFromContratos[] = $pokemonNameByContrato;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,9 +54,9 @@ $idPokemonContartos = getIdPokemonContratos($pdo);
         <button type="submit">Contratar</button>
     </form>
     <ul>
-        <?php foreach ($idPokemonContartos as $idPokemones): ?>
+        <?php foreach ($pokemonNamesFromContratos as $pokemonName): ?>
             <li>
-                <?php echo htmlspecialchars($idPokemones['id_pokemon']); ?>
+                <?php echo htmlspecialchars($pokemonName); ?>
             </li>
         <?php endforeach; ?>
     </ul>
