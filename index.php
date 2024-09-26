@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo 'Error al crear el contrato';
     }
 }
+
+$idPokemonContartos = getIdPokemonContratos($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -43,5 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
         <button type="submit">Contratar</button>
     </form>
+    <ul>
+        <?php foreach ($idPokemonContartos as $idPokemones): ?>
+            <li>
+                <?php echo htmlspecialchars($idPokemones['id_pokemon']); ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 </body>
 </html>

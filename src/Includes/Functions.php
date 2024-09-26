@@ -73,7 +73,22 @@ function createContrato($pdo, $sicarioName, $pokemonId) {
         $stmt->bindParam(':id_pokemon', $pokemonId);
         $stmt->execute();
 
+        return "Contrato para $pokemonName, creado.";
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
+    }
+}
+
+function getIdPokemonContratos($pdo) {
+    try{
+        $sql = "SELECT id_pokemon FROM contrato";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+        return [];
     }
 }
