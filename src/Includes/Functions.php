@@ -59,7 +59,7 @@ function createContrato($pdo, $sicarioName, $pokemonId) {
             $fechaActual = new DateTime();
             $diferencia = $fechaActual->diff($fechaCreacion);
 
-            if ($diferencia->i >= 2 || $diferencia->h > 0 || $diferencia->d > 0) {
+            if ($diferencia->i >= 2) {
                 echo "$pokemonName ya esta muerto.";
                 return;
             }
