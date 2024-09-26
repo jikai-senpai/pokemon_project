@@ -46,6 +46,7 @@ function getPokemonNameById($pdo, $name) {
 
 function createContrato($pdo, $sicarioName, $pokemonId) {
     try {
+        // Revisa si el pokemon ya esta muerto
         $sql = "SELECT create_at FROM contrato WHERE id_pokemon = :id_pokemon ORDER BY create_at DESC LIMIT 1";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id_pokemon', $pokemonId);
@@ -65,16 +66,12 @@ function createContrato($pdo, $sicarioName, $pokemonId) {
             }
         }
 
+        // Crear el contrato
         $sql = "INSERT INTO contrato (sicario_name, id_pokemon) VALUES (:sicario_name, :id_pokemon)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':sicario_name', $sicarioName);
         $stmt->bindParam(':id_pokemon', $pokemonId);
         $stmt->execute();
-
-        $pokemonName = getPokemonNameById($pdo, $pokemonId);
-
-        sleep(120);
-        echo "$pokemonName ha sido eliminado.";
 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
