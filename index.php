@@ -56,7 +56,7 @@ foreach ($idPokemonContartos as $idPokemon) {
     <ul>
         <?php foreach ($pokemonNamesFromContratos as $pokemonName): ?>
             <li>
-                <?php echo htmlspecialchars($pokemonName); ?>
+                <?php echo "Contrato para eliminar a " . htmlspecialchars($pokemonName) . ", creado."; ?>
             </li>
         <?php endforeach; ?>
     </ul>
