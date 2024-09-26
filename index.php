@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($sicarioName && $pokemonId) {
         createContrato($pdo, $sicarioName, $pokemonId);
-        echo 'Contrato creado exitosamente';
     } else {
         echo 'Error al crear el contrato';
     }
