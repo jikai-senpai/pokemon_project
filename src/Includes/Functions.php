@@ -30,40 +30,8 @@ function getPokemonIdByName($pdo, $name) {
     }
 }
 
-function updatePokemonStatus($pdo, $pokemonId) {
-    try {
-        $sql = "UPDATE pokemones SET status = 0 WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id', $pokemonId);
-        $stmt->execute();
-        echo "Estado del Pokémon actualizado exitosamente.";
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
-}
-
 function createContrato($pdo, $sicarioName, $pokemonId) {
     try {
-        // Verificar el estado del Pokémon
-        $sql = "SELECT status FROM pokemones WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id', $pokemonId);
-        $stmt->execute();
-        $status = $stmt->fetchColumn();
-
-        if ($status == 0) {
-            echo "Este pokemon ya está muerto.";
-            return;
-        }
-
-        // Crear registro del contrato
-        $sql = "INSERT INTO contrato (sicario_name, id_pokemon) VALUES (:sicario_name, :id_pokemon)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':sicario_name', $sicarioName);
-        $stmt->bindParam(':id_pokemon', $pokemonId);
-        $stmt->execute();
-
-        // Cambiar el estado del pokemon si el contrato tiene 2 minutos o más
         $sql = "SELECT create_at FROM contrato WHERE id_pokemon = :id_pokemon ORDER BY create_at DESC LIMIT 1";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id_pokemon', $pokemonId);
@@ -76,9 +44,20 @@ function createContrato($pdo, $sicarioName, $pokemonId) {
             $diferencia = $fechaActual->diff($fechaCreacion);
 
             if ($diferencia->i >= 2 || $diferencia->h > 0 || $diferencia->d > 0) {
-                updatePokemonStatus($pdo, $pokemonId);
+                echo "Este pokemon ya esta eliminado.";
+                return;
             }
         }
+
+        $sql = "INSERT INTO contrato (sicario_name, id_pokemon) VALUES (:sicario_name, :id_pokemon)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':sicario_name', $sicarioName);
+        $stmt->bindParam(':id_pokemon', $pokemonId);
+        $stmt->execute();
+
+        sleep(120);
+        echo "El pokemon ha sido eliminado.";
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
