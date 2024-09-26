@@ -30,6 +30,20 @@ function getPokemonIdByName($pdo, $name) {
     }
 }
 
+function getPokemonNameById($pdo, $name) {
+    try{
+        $sql = "SELECT name FROM pokemones WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $name);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+        return null;
+    }
+}
+
 function createContrato($pdo, $sicarioName, $pokemonId) {
     try {
         $sql = "SELECT create_at FROM contrato WHERE id_pokemon = :id_pokemon ORDER BY create_at DESC LIMIT 1";
@@ -38,13 +52,15 @@ function createContrato($pdo, $sicarioName, $pokemonId) {
         $stmt->execute();
         $createAt = $stmt->fetchColumn();
 
+        $pokemonName = getPokemonNameById($pdo, $pokemonId);
+
         if ($createAt) {
             $fechaCreacion = new DateTime($createAt);
             $fechaActual = new DateTime();
             $diferencia = $fechaActual->diff($fechaCreacion);
 
             if ($diferencia->i >= 2 || $diferencia->h > 0 || $diferencia->d > 0) {
-                echo "Este pokemon ya esta eliminado.";
+                echo "$pokemonName ya esta muerto.";
                 return;
             }
         }
@@ -55,8 +71,10 @@ function createContrato($pdo, $sicarioName, $pokemonId) {
         $stmt->bindParam(':id_pokemon', $pokemonId);
         $stmt->execute();
 
+        $pokemonName = getPokemonNameById($pdo, $pokemonId);
+
         sleep(120);
-        echo "El pokemon ha sido eliminado.";
+        echo "$pokemonName ha sido eliminado.";
 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
