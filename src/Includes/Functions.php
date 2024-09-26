@@ -44,6 +44,22 @@ function getPokemonNameById($pdo, $name) {
     }
 }
 
+function getCreateAtByPokemonName($pdo, $pokemonName) {
+    try {
+        $sql = "SELECT create_at FROM contrato c
+                JOIN pokemones p ON c.id_pokemon = p.id
+                WHERE p.name = :name
+                ORDER BY create_at DESC LIMIT 1";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':name', $pokemonName);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return null;
+    }
+}
+
 function createContrato($pdo, $sicarioName, $pokemonId) {
     try {
         // Revisa si el pokemon ya esta muerto

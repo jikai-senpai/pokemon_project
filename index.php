@@ -55,8 +55,22 @@ foreach ($idPokemonContartos as $idPokemon) {
     </form>
     <ul>
         <?php foreach ($pokemonNamesFromContratos as $pokemonName): ?>
+            <?php
+            // Obtener la fecha de creación del contrato
+            $createAt = getCreateAtByPokemonName($pdo, $pokemonName);
+            $fechaCreacion = new DateTime($createAt);
+            $fechaActual = new DateTime();
+            $diferencia = $fechaActual->diff($fechaCreacion);
+
+            // Verificar si han pasado 2 minutos o más
+            if ($diferencia->i >= 2) {
+                $mensaje = htmlspecialchars($pokemonName) . " ha sido eliminado.";
+            } else {
+                $mensaje = "Contrato para eliminar a " . htmlspecialchars($pokemonName) . ", creado.";
+            }
+            ?>
             <li>
-                <?php echo "Contrato para eliminar a " . htmlspecialchars($pokemonName) . ", creado."; ?>
+                <?php echo $mensaje; ?>
             </li>
         <?php endforeach; ?>
     </ul>
